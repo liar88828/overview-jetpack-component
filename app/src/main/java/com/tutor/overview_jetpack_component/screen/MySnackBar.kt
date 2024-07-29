@@ -86,7 +86,7 @@ fun SnackBarAction(modifier: Modifier = Modifier) {
 @Composable
 private fun MySnackBarPrev() {
 	OverviewJetpackComponentTheme {
-//		SnackBarBasic()
+		SnackBarBasic()
 		SnackBarAction()
 	}
 }

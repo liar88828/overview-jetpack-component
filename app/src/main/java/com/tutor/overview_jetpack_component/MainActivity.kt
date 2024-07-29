@@ -1,20 +1,18 @@
 package com.tutor.overview_jetpack_component
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.tutor.overview_jetpack_component.screen.preferences_datastore.MyMainModel
 import com.tutor.overview_jetpack_component.screen.room_database.contact.ContactDatabase
 import com.tutor.overview_jetpack_component.screen.room_database.contact.ContactViewModel
-import com.tutor.overview_jetpack_component.screen.room_database.contact.MyContactScreen
+import com.tutor.overview_jetpack_component.screen.room_database.todo.TodoListPage
+import com.tutor.overview_jetpack_component.screen.room_database.todo.TodoViewModel
 import com.tutor.overview_jetpack_component.ui.theme.OverviewJetpackComponentTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,17 +35,19 @@ class MainActivity : ComponentActivity() {
 			}
 		}
 	)
+	private lateinit var todoViewModel: TodoViewModel
 
-	@SuppressLint("RememberReturnType")
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		todoViewModel = ViewModelProvider(this)[TodoViewModel::class.java]
 		enableEdgeToEdge()
 		setContent {
 			OverviewJetpackComponentTheme {
 //				MyNotification(applicationContext)
 //				MyPreferenceDataBaseScreen(mainViewModel)
-				val state by viewModel.state.collectAsState()
-				MyContactScreen(state = state, onEvent = viewModel::onEvent)
+//				val state by viewModel.state.collectAsState()
+//				MyContactScreen(state = state, onEvent = viewModel::onEvent)
+				TodoListPage(viewModel = todoViewModel)
 			}
 		}
 	}
