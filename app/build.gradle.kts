@@ -2,6 +2,9 @@ plugins {
 	alias(libs.plugins.android.application)
 	alias(libs.plugins.kotlin.android)
 	alias(libs.plugins.kotlin.compose)
+	kotlin("kapt")
+	id("kotlin-kapt")
+	id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -37,6 +40,7 @@ android {
 	buildFeatures {
 		compose = true
 	}
+
 }
 
 dependencies {
@@ -55,13 +59,28 @@ dependencies {
 	androidTestImplementation(libs.androidx.ui.test.junit4)
 	debugImplementation(libs.androidx.ui.tooling)
 	debugImplementation(libs.androidx.ui.test.manifest)
-//
+	// Room Database
+	dependencies {
+		val roomVersion = "2.6.1"
+		implementation("androidx.room:room-ktx:$roomVersion")
+		kapt("androidx.room:room-compiler:$roomVersion")
+		implementation("androidx.room:room-runtime:$roomVersion")
+	}
+	// LiveData
+	implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
+// permission handle
 	implementation(
 		"com.google.accompanist:accompanist-permissions:0.32.0"
 	)
+//	navigation
+	implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
 	dependencies {
 		val nav_version = "2.7.7"
-
 		implementation("androidx.navigation:navigation-compose:$nav_version")
 	}
+	// DataStore
+	implementation("androidx.datastore:datastore-preferences:1.1.1")
+	// Hilt
+	implementation("com.google.dagger:hilt-android:2.48.1")
+	kapt("com.google.dagger:hilt-compiler:2.48.1")
 }

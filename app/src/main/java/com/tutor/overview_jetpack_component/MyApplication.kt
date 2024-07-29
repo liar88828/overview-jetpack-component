@@ -5,7 +5,9 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import com.tutor.overview_jetpack_component.screen.notification_screen.NOTIFICATION_CHANNEL_ID
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class MyApplication : Application() {
 	override fun onCreate() {
 		super.onCreate()
