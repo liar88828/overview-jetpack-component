@@ -8,7 +8,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MyMainModel @Inject constructor(
+class MyMainModel
+@Inject
+constructor(
 	private val myPreferenceDataStore: MyPreferenceDataStore
 ) : ViewModel() {
 	val isCompleted = myPreferenceDataStore.taskStatusFlow.map {

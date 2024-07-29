@@ -40,7 +40,6 @@ android {
 	buildFeatures {
 		compose = true
 	}
-
 }
 
 dependencies {
@@ -61,26 +60,20 @@ dependencies {
 	debugImplementation(libs.androidx.ui.test.manifest)
 	// Room Database
 	dependencies {
-		val roomVersion = "2.6.1"
-		implementation("androidx.room:room-ktx:$roomVersion")
-		kapt("androidx.room:room-compiler:$roomVersion")
-		implementation("androidx.room:room-runtime:$roomVersion")
+		implementation(libs.androidx.room.ktx)
+		kapt(libs.androidx.room.compiler)
+		implementation(libs.androidx.room.runtime)
 	}
 	// LiveData
-	implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
+	implementation(libs.androidx.lifecycle.livedata.ktx)
 // permission handle
-	implementation(
-		"com.google.accompanist:accompanist-permissions:0.32.0"
-	)
+	implementation(libs.accompanist.permissions)
 //	navigation
-	implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
-	dependencies {
-		val nav_version = "2.7.7"
-		implementation("androidx.navigation:navigation-compose:$nav_version")
-	}
+	implementation(libs.androidx.lifecycle.runtime.compose)
+	implementation(libs.androidx.navigation.compose)
 	// DataStore
-	implementation("androidx.datastore:datastore-preferences:1.1.1")
+	implementation(libs.androidx.datastore.preferences)
 	// Hilt
-	implementation("com.google.dagger:hilt-android:2.48.1")
-	kapt("com.google.dagger:hilt-compiler:2.48.1")
+	implementation(libs.dagger.hilt.android)
+	kapt(libs.hilt.compiler)
 }
