@@ -11,7 +11,10 @@ import androidx.room.Room
 import com.tutor.overview_jetpack_component.screen.preferences_datastore.MyMainModel
 import com.tutor.overview_jetpack_component.screen.room_database.contact.ContactDatabase
 import com.tutor.overview_jetpack_component.screen.room_database.contact.ContactViewModel
-import com.tutor.overview_jetpack_component.screen.room_database.todo.TodoListPage
+import com.tutor.overview_jetpack_component.screen.room_database.note.NoteDatabase
+import com.tutor.overview_jetpack_component.screen.room_database.note.NoteRepo
+import com.tutor.overview_jetpack_component.screen.room_database.note.NoteScreen
+import com.tutor.overview_jetpack_component.screen.room_database.note.NoteViewModel
 import com.tutor.overview_jetpack_component.screen.room_database.todo.TodoViewModel
 import com.tutor.overview_jetpack_component.ui.theme.OverviewJetpackComponentTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +39,21 @@ class MainActivity : ComponentActivity() {
 		}
 	)
 	private lateinit var todoViewModel: TodoViewModel
+	private val noteDatabase by lazy {
+		Room.databaseBuilder(
+			applicationContext,
+			NoteDatabase::class.java,
+			"notes.db"
+		).build()
+	}
+	private val noteViewModel by viewModels<NoteViewModel>(
+		factoryProducer = {
+			object : ViewModelProvider.Factory {
+				override fun <T : ViewModel> create(modelClass: Class<T>): T {
+					return NoteViewModel(NoteRepo(noteDatabase)) as T
+				}
+			}
+		})
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -47,7 +65,8 @@ class MainActivity : ComponentActivity() {
 //				MyPreferenceDataBaseScreen(mainViewModel)
 //				val state by viewModel.state.collectAsState()
 //				MyContactScreen(state = state, onEvent = viewModel::onEvent)
-				TodoListPage(viewModel = todoViewModel)
+//				TodoListPage(viewModel = todoViewModel)
+				NoteScreen(noteViewModel)
 			}
 		}
 	}
