@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.content.Context
 import androidx.room.Room
 import com.tutor.overview_jetpack_component.screen.notification_screen.NOTIFICATION_CHANNEL_ID
+import com.tutor.overview_jetpack_component.screen.room_database.shopping_list.Graph
 import com.tutor.overview_jetpack_component.screen.room_database.todo.TodoDatabase
 import dagger.hilt.android.HiltAndroidApp
 
@@ -17,6 +18,7 @@ class MyApplication : Application() {
 
 	override fun onCreate() {
 		super.onCreate()
+		Graph.provide(this)
 // Todo Database
 		todoDatabase = Room.databaseBuilder(
 			applicationContext,

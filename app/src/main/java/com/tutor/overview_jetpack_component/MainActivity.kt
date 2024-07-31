@@ -14,10 +14,10 @@ import com.tutor.overview_jetpack_component.screen.room_database.contact.Contact
 import com.tutor.overview_jetpack_component.screen.room_database.contact.ContactViewModel
 import com.tutor.overview_jetpack_component.screen.room_database.memo.data.MemoDatabase
 import com.tutor.overview_jetpack_component.screen.room_database.memo.persentation.MemoViewModel
-import com.tutor.overview_jetpack_component.screen.room_database.memo.screen.MemoScreen
 import com.tutor.overview_jetpack_component.screen.room_database.note.NoteDatabase
 import com.tutor.overview_jetpack_component.screen.room_database.note.NoteRepo
 import com.tutor.overview_jetpack_component.screen.room_database.note.NoteViewModel
+import com.tutor.overview_jetpack_component.screen.room_database.shopping_list.screen.ShoppingNavigation
 import com.tutor.overview_jetpack_component.screen.room_database.todo.TodoViewModel
 import com.tutor.overview_jetpack_component.ui.theme.OverviewJetpackComponentTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,10 +37,11 @@ class MainActivity : ComponentActivity() {
 //				MyContactScreen(state = state, onEvent = viewModel::onEvent)
 //				TodoListPage(viewModel = todoViewModel)
 //				NoteScreen(noteViewModel)
-				MemoScreen(
-					navController = navController,
-					viewModel = memoViewModel,
-				)
+//				MemoScreen(
+//					navController = navController,
+//					viewModel = memoViewModel,
+//				)
+				ShoppingNavigation(navController = navController)
 			}
 		}
 	}
