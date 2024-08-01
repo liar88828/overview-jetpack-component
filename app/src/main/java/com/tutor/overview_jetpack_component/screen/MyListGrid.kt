@@ -171,3 +171,21 @@ private fun MovieCardPrev() {
 private fun MyListGridPrev() {
 	OverviewJetpackComponentTheme { MyListGrid() }
 }
+
+@Preview(showBackground = true)
+@Composable
+private fun MyListColumnPrev() {
+	OverviewJetpackComponentTheme { MyListColumn() }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun MyLazyColumnPrev() {
+	OverviewJetpackComponentTheme { MyLazyColumn() }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun MyLazyVerticalGridPrev() {
+	OverviewJetpackComponentTheme { MyLazyVerticalGrid() }
+}

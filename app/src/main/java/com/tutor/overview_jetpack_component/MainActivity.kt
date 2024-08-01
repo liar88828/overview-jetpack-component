@@ -16,12 +16,13 @@ import com.tutor.overview_jetpack_component.screen.preferences_datastore.MyMainM
 import com.tutor.overview_jetpack_component.screen.room_database.contact.ContactDatabase
 import com.tutor.overview_jetpack_component.screen.room_database.contact.ContactViewModel
 import com.tutor.overview_jetpack_component.screen.room_database.market.persentation.UserViewModel
-import com.tutor.overview_jetpack_component.screen.room_database.market.screen.UserNavigationScreen
 import com.tutor.overview_jetpack_component.screen.room_database.memo.data.MemoDatabase
 import com.tutor.overview_jetpack_component.screen.room_database.memo.persentation.MemoViewModel
 import com.tutor.overview_jetpack_component.screen.room_database.note.NoteDatabase
 import com.tutor.overview_jetpack_component.screen.room_database.note.NoteRepo
 import com.tutor.overview_jetpack_component.screen.room_database.note.NoteViewModel
+import com.tutor.overview_jetpack_component.screen.room_database.product.persentation.ProductViewModel
+import com.tutor.overview_jetpack_component.screen.room_database.product.screen.ProductNav
 import com.tutor.overview_jetpack_component.screen.room_database.todo.TodoViewModel
 import com.tutor.overview_jetpack_component.ui.theme.OverviewJetpackComponentTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
 			OverviewJetpackComponentTheme {
 				val contactState by contactViewModel.state.collectAsState()
 				val userViewModel = viewModel(modelClass = UserViewModel::class.java)
+				val ProductViewModel = viewModel(modelClass = ProductViewModel::class.java)
 //				val userViewModel = viewModel<UserViewModel>(factory = UserViewModelFactory(userDatabase.dao))
 				val navController = rememberNavController()
 //				MyNotification(applicationContext)
@@ -50,10 +52,14 @@ class MainActivity : ComponentActivity() {
 //					viewModel = memoViewModel,
 //				)
 //				ShoppingNavigation(navController = navController)
-				UserNavigationScreen(
+				ProductNav(
 					navController = navController,
-					viewModel = userViewModel
+					viewModel = ProductViewModel
 				)
+//				UserNavigationScreen(
+//					navController = navController,
+//					viewModel = userViewModel
+//				)
 			}
 		}
 	}
