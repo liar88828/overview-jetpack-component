@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +18,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
@@ -39,6 +41,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -47,12 +50,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.tutor.overview_jetpack_component.R
 import com.tutor.overview_jetpack_component.screen.room_database.product.data.Product
+import com.tutor.overview_jetpack_component.screen.room_database.product.data.productExample
 import com.tutor.overview_jetpack_component.screen.room_database.product.persentation.ProductEvent
 import com.tutor.overview_jetpack_component.screen.room_database.product.persentation.ProductState
 
@@ -175,48 +180,43 @@ fun ProductListScreen(
 				.padding(paddingValue)
 				.fillMaxSize(),
 		) {
-			ListProduct()
+			Column(modifier = modifier.fillMaxSize()) {
+				Row(
+					modifier = modifier
+						.fillMaxWidth()
+						.padding(horizontal = 20.dp, vertical = 20.dp),
+					horizontalArrangement = Arrangement.SpaceBetween,
+					verticalAlignment = Alignment.CenterVertically
+				) {
+					Row {
+						Text(
+							text = "All", fontWeight = FontWeight.SemiBold,
+							fontSize = 26.sp
+						)
+						Spacer(modifier = modifier.size(4.dp))
+						Text(
+							text = "Products", fontWeight = FontWeight.Light,
+							fontSize = 24.sp
+						)
+					}
+					TextButton(onClick = {}) {
+						Text(
+							"Filter ",
+							fontWeight = FontWeight.SemiBold,
+							textDecoration = TextDecoration.Underline,
+							fontSize = 16.sp
+						)
+						Icon(
+							imageVector = Icons.Default.ArrowDropDown,
+							contentDescription = "Filter"
+						)
+					}
+				}
+				ListProduct()
+			}
 		}
 	}
 }
-
-var example: List<Product> = listOf(
-	Product(
-		id = 2,
-		name = "Phone",
-		qty = "134",
-		description = "Is Mobile Phone",
-		price = "999"
-	),
-	Product(
-		id = 3,
-		name = "Laptop",
-		qty = "78",
-		description = "High-performance laptop",
-		price = "1500"
-	),
-	Product(
-		id = 4,
-		name = "Tablet",
-		qty = "56",
-		description = "Portable tablet device",
-		price = "600"
-	),
-	Product(
-		id = 5,
-		name = "Smartwatch",
-		qty = "200",
-		description = "Wearable smart device",
-		price = "250"
-	),
-	Product(
-		id = 6,
-		name = "Headphones",
-		qty = "320",
-		description = "Noise-cancelling headphones",
-		price = "150"
-	)
-)
 
 @Composable
 fun ProductItem(
@@ -296,8 +296,8 @@ fun ListProduct(modifier: Modifier = Modifier) {
 		horizontalArrangement = Arrangement.spacedBy(6.dp),
 		verticalArrangement = Arrangement.spacedBy(6.dp),
 	) {
-		items(example.size, key = { it }) {
-			ProductItem(item = example[it])
+		items(productExample.size, key = { it }) {
+			ProductItem(item = productExample[it])
 		}
 	}
 }
@@ -323,6 +323,6 @@ private fun ListProductPrev() {
 @Composable
 private fun ProductItemPrev() {
 	ProductItem(
-		item = example[0]
+		item = productExample[0]
 	)
 }
