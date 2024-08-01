@@ -5,19 +5,23 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.tutor.overview_jetpack_component.screen.preferences_datastore.MyMainModel
 import com.tutor.overview_jetpack_component.screen.room_database.contact.ContactDatabase
 import com.tutor.overview_jetpack_component.screen.room_database.contact.ContactViewModel
+import com.tutor.overview_jetpack_component.screen.room_database.market.persentation.UserViewModel
+import com.tutor.overview_jetpack_component.screen.room_database.market.screen.UserNavigationScreen
 import com.tutor.overview_jetpack_component.screen.room_database.memo.data.MemoDatabase
 import com.tutor.overview_jetpack_component.screen.room_database.memo.persentation.MemoViewModel
 import com.tutor.overview_jetpack_component.screen.room_database.note.NoteDatabase
 import com.tutor.overview_jetpack_component.screen.room_database.note.NoteRepo
 import com.tutor.overview_jetpack_component.screen.room_database.note.NoteViewModel
-import com.tutor.overview_jetpack_component.screen.room_database.shopping_list.screen.ShoppingNavigation
 import com.tutor.overview_jetpack_component.screen.room_database.todo.TodoViewModel
 import com.tutor.overview_jetpack_component.ui.theme.OverviewJetpackComponentTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,21 +31,29 @@ class MainActivity : ComponentActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		todoViewModel = ViewModelProvider(this)[TodoViewModel::class.java]
+
 		enableEdgeToEdge()
 		setContent {
 			OverviewJetpackComponentTheme {
+				val contactState by contactViewModel.state.collectAsState()
+				val userViewModel = viewModel(modelClass = UserViewModel::class.java)
+//				val userViewModel = viewModel<UserViewModel>(factory = UserViewModelFactory(userDatabase.dao))
 				val navController = rememberNavController()
 //				MyNotification(applicationContext)
 //				MyPreferenceDataBaseScreen(mainViewModel)
 //				val state by viewModel.state.collectAsState()
-//				MyContactScreen(state = state, onEvent = viewModel::onEvent)
+//				MyContactScreen(state = state, onEvent = contactViewModel::onEvent)
 //				TodoListPage(viewModel = todoViewModel)
 //				NoteScreen(noteViewModel)
 //				MemoScreen(
 //					navController = navController,
 //					viewModel = memoViewModel,
 //				)
-				ShoppingNavigation(navController = navController)
+//				ShoppingNavigation(navController = navController)
+				UserNavigationScreen(
+					navController = navController,
+					viewModel = userViewModel
+				)
 			}
 		}
 	}
@@ -70,7 +82,7 @@ class MainActivity : ComponentActivity() {
 			"contacts.db"
 		).build()
 	}
-	private val viewModel by viewModels<ContactViewModel>(
+	private val contactViewModel by viewModels<ContactViewModel>(
 		factoryProducer = {
 			object : ViewModelProvider.Factory {
 				override fun <T : ViewModel> create(modelClass: Class<T>): T {

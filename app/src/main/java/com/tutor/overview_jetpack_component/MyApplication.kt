@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.content.Context
 import androidx.room.Room
 import com.tutor.overview_jetpack_component.screen.notification_screen.NOTIFICATION_CHANNEL_ID
+import com.tutor.overview_jetpack_component.screen.room_database.market.data.UserGraph
 import com.tutor.overview_jetpack_component.screen.room_database.shopping_list.Graph
 import com.tutor.overview_jetpack_component.screen.room_database.todo.TodoDatabase
 import dagger.hilt.android.HiltAndroidApp
@@ -14,11 +15,20 @@ import dagger.hilt.android.HiltAndroidApp
 class MyApplication : Application() {
 	companion object {
 		lateinit var todoDatabase: TodoDatabase
+//		lateinit var userDatabase: UserDatabase
+
 	}
 
 	override fun onCreate() {
 		super.onCreate()
 		Graph.provide(this)
+		UserGraph.provide(this)
+// user Database are not contractor
+//		userDatabase = Room.databaseBuilder(
+//			applicationContext,
+//			UserDatabase::class.java,
+//			UserDatabase.DATABASE_NAME
+//		).build()
 // Todo Database
 		todoDatabase = Room.databaseBuilder(
 			applicationContext,
