@@ -1,0 +1,51 @@
+package com.tutor.overview_jetpack_component.screen.retrofit.shop.data.model
+
+data class Product(
+	val availabilityStatus: String,
+	val brand: String,
+	val category: String,
+	val description: String,
+	val dimensions: Dimensions,
+	val discountPercentage: Double,
+	val id: Int,
+	val images: List<String>,
+	val meta: Meta,
+	val minimumOrderQuantity: Int,
+	val price: Double,
+	val rating: Double,
+	val returnPolicy: String,
+	val reviews: List<Review>,
+	val shippingInformation: String,
+	val sku: String,
+	val stock: Int,
+	val tags: List<String>,
+	val thumbnail: String,
+	val title: String,
+	val warrantyInformation: String,
+	val weight: Int
+)
+
+val productExample = Product(
+	availabilityStatus = "In Stock",
+	brand = "Acme Corporation",
+	category = "Electronics",
+	description = "A phone is a portable electronic device that allows users to make and receive voice calls, send and receive text messages, and access various applications and services. It typically consists of a touchscreen display, a keypad or virtual keyboard, and a built-in speaker and microphone. Modern phones also feature advanced capabilities such as high-speed internet connectivity, GPS navigation, and high-quality cameras, making them an essential tool for daily life and communication.",
+	dimensions = dimensions,
+	discountPercentage = 10.0,
+	id = 12345,
+	images = listOf("https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"),
+	meta = meta,
+	minimumOrderQuantity = 1,
+	price = 99.99,
+	rating = 4.7,
+	returnPolicy = "30-day return policy",
+	reviews = listOf(review),
+	shippingInformation = "Free shipping",
+	sku = "SKU123",
+	stock = 100,
+	tags = listOf("electronics", "gadget"),
+	thumbnail = "thumbnail.jpg",
+	title = "Awesome Product",
+	warrantyInformation = "1-year warranty",
+	weight = 500
+)

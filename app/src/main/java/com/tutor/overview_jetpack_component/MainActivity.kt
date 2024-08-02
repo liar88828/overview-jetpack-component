@@ -13,6 +13,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.tutor.overview_jetpack_component.screen.preferences_datastore.MyMainModel
+import com.tutor.overview_jetpack_component.screen.retrofit.shop.screen.ProductNavigation
 import com.tutor.overview_jetpack_component.screen.room_database.contact.ContactDatabase
 import com.tutor.overview_jetpack_component.screen.room_database.contact.ContactViewModel
 import com.tutor.overview_jetpack_component.screen.room_database.market.persentation.UserViewModel
@@ -22,7 +23,6 @@ import com.tutor.overview_jetpack_component.screen.room_database.note.NoteDataba
 import com.tutor.overview_jetpack_component.screen.room_database.note.NoteRepo
 import com.tutor.overview_jetpack_component.screen.room_database.note.NoteViewModel
 import com.tutor.overview_jetpack_component.screen.room_database.product.persentation.ProductViewModel
-import com.tutor.overview_jetpack_component.screen.room_database.product.screen.ProductNav
 import com.tutor.overview_jetpack_component.screen.room_database.todo.TodoViewModel
 import com.tutor.overview_jetpack_component.ui.theme.OverviewJetpackComponentTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,24 +52,36 @@ class MainActivity : ComponentActivity() {
 //					viewModel = memoViewModel,
 //				)
 //				ShoppingNavigation(navController = navController)
-				ProductNav(
-					navController = navController,
-					viewModel = ProductViewModel
-				)
+//				ProductNav(
+//					navController = navController,
+//					viewModel = ProductViewModel
+//				)
 //				UserNavigationScreen(
 //					navController = navController,
 //					viewModel = userViewModel
 //				)
+				ProductNavigation(
+//					productRetrofitApi
+				)
 			}
 		}
 	}
+
+//	private val productRetrofitApi by viewModels<ProductRetroViewModel>(factoryProducer = {
+//		object : ViewModelProvider.Factory {
+//			override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//				return ProductRetroViewModel(ProductRepositoryImpl(ProductRetrofitApi.productApi)) as T
+//			}
+//		}
+//	})
 
 	private val memoDatabase by lazy {
 		Room.databaseBuilder(
 			applicationContext,
 			MemoDatabase::class.java,
 			"memos.db"
-		).build()
+		)
+			.build()
 	}
 	private val memoViewModel by viewModels<MemoViewModel>(
 		factoryProducer = {
@@ -86,7 +98,8 @@ class MainActivity : ComponentActivity() {
 			applicationContext,
 			ContactDatabase::class.java,
 			"contacts.db"
-		).build()
+		)
+			.build()
 	}
 	private val contactViewModel by viewModels<ContactViewModel>(
 		factoryProducer = {
@@ -103,7 +116,8 @@ class MainActivity : ComponentActivity() {
 			applicationContext,
 			NoteDatabase::class.java,
 			"notes.db"
-		).build()
+		)
+			.build()
 	}
 	private val noteViewModel by viewModels<NoteViewModel>(
 		factoryProducer = {
