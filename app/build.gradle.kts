@@ -62,6 +62,7 @@ dependencies {
 	// Room Database
 	dependencies {
 		implementation(libs.androidx.room.ktx)
+		//noinspection KaptUsageInsteadOfKsp
 		kapt(libs.androidx.room.compiler)
 		implementation(libs.androidx.room.runtime)
 	}
@@ -78,7 +79,9 @@ dependencies {
 	implementation(libs.dagger.hilt.android)
 	kapt(libs.hilt.compiler)
 //	Icon
-	implementation("androidx.compose.material:material-icons-extended:1.6.7")
-
+	implementation(libs.androidx.material.icons.extended)
+//
+	implementation(libs.retrofit)
+	implementation(libs.converter.gson)
 
 }
