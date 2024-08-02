@@ -77,4 +77,8 @@ dependencies {
 	// Hilt
 	implementation(libs.dagger.hilt.android)
 	kapt(libs.hilt.compiler)
+//	Icon
+	implementation("androidx.compose.material:material-icons-extended:1.6.7")
+
+
 }

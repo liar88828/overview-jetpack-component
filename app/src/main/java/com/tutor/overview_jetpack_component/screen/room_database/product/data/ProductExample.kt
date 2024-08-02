@@ -3,7 +3,7 @@ package com.tutor.overview_jetpack_component.screen.room_database.product.data
 var productExample: List<Product> = listOf(
 	Product(
 		id = 2,
-		name = "Phone Android 13 Pro Max 128GB",
+		name = "Phone ",
 		qty = "134",
 		description = "The Samsung Galaxy S22 Ultra 5G is a high-end Android smartphone that comes with a massive 6.8-inch Dynamic AMOLED display, a powerful Exynos 2100 chipset, and up to 16GB of RAM. It also features a quad-camera setup with a 108MP primary sensor, a 40MP front camera, and a large 5000mAh battery with fast charging support. The device runs on Android 13 out of the box and has a storage capacity of up to 128GB.",
 		price = "999"
@@ -24,7 +24,7 @@ var productExample: List<Product> = listOf(
 	),
 	Product(
 		id = 5,
-		name = "Smartwatch",
+		name = "Smartwatch Android 13 Pro Max 128GB",
 		qty = "200",
 		description = "Wearable smart device",
 		price = "250"

@@ -19,8 +19,8 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Notifications
@@ -89,7 +89,7 @@ fun ProductDetailScreen(
 		},
 		bottomBar = {
 			BottomAppBar(
-				windowInsets = WindowInsets(30, 0, 30, 30),
+				windowInsets = WindowInsets(40, 0, 40, 30),
 			) {
 				Row(
 					horizontalArrangement = Arrangement.SpaceBetween,
@@ -102,34 +102,34 @@ fun ProductDetailScreen(
 						)
 					}
 
-					ExtendedFloatingActionButton(
+					FloatingActionButton(
 						onClick = { /*TODO*/ },
 						containerColor = MaterialTheme.colorScheme.primaryContainer,
 					) {
 						Icon(
-							imageVector = Icons.Default.Add,
-							contentDescription = "Icon add",
+							imageVector = Icons.Default.MailOutline,
+							contentDescription = "Message Icon",
 						)
-						Spacer(modifier = modifier.size(8.dp))
-						Text(text = "Buy Now")
 					}
 					ExtendedFloatingActionButton(
 						onClick = { /*TODO*/ },
 						containerColor = MaterialTheme.colorScheme.inversePrimary,
 					) {
+						Spacer(modifier = modifier.size(30.dp))
 						Icon(
 							imageVector = Icons.Default.ShoppingCart,
-							contentDescription = "Icon trolley"
+							contentDescription = "Icon trolley",
 						)
 						Spacer(modifier = modifier.size(8.dp))
 						Text(text = "Add to Cart")
+						Spacer(modifier = modifier.size(30.dp))
 					}
 				}
 			}
 		},
 		topBar = {
 			CenterAlignedTopAppBar(
-				windowInsets = WindowInsets(30, 0, 30, 0),
+				windowInsets = WindowInsets(40, 0, 40, 0),
 				colors = TopAppBarDefaults.topAppBarColors(
 					containerColor = MaterialTheme.colorScheme.primaryContainer,
 //					titleContentColor = MaterialTheme.colorScheme.primary,

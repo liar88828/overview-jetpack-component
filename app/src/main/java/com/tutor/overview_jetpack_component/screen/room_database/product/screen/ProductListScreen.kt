@@ -13,8 +13,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -49,7 +49,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -88,7 +90,7 @@ fun ProductListScreen(
 		},
 		topBar = {
 			CenterAlignedTopAppBar(
-				windowInsets = WindowInsets(30, 0, 30, 0),
+				windowInsets = WindowInsets(40, 0, 40, 0),
 				colors = TopAppBarDefaults.topAppBarColors(
 					containerColor = MaterialTheme.colorScheme.primaryContainer,
 //					titleContentColor = MaterialTheme.colorScheme.primary,
@@ -224,6 +226,9 @@ fun ProductItem(
 	modifier: Modifier = Modifier
 ) {
 	Card(
+		colors = CardDefaults.cardColors(
+			containerColor = MaterialTheme.colorScheme.primaryContainer
+		),
 		modifier = modifier
 			.fillMaxWidth()
 			.padding(4.dp),
@@ -263,23 +268,34 @@ fun ProductItem(
 						.size(120.dp)
 						.padding(8.dp)
 						.background(
-							MaterialTheme.colorScheme.primaryContainer,
+							MaterialTheme.colorScheme.primary,
 							shape = CircleShape
 						),
 					// fix size
 				)
-				Text(
-					item.name,
-					fontSize = 14.sp,
-					fontWeight = FontWeight.Medium
-				)
+				Column(
+					modifier = modifier
+						.fillMaxWidth()
+						.padding(horizontal = 8.dp),
+					horizontalAlignment = Alignment.CenterHorizontally,
+					verticalArrangement = Arrangement.spacedBy(4.dp),
+				) {
+					Text(
+						item.name,
+						fontSize = 14.sp,
+						fontWeight = FontWeight.Medium,
+						textAlign = TextAlign.Center,
+						style = TextStyle(
+						)
+					)
+					Spacer(modifier = modifier.size(4.dp))
 
-
-				Text(
-					"$${item.price}",
-					fontSize = 12.sp,
-					fontWeight = FontWeight.SemiBold
-				)
+					Text(
+						"$${item.price}",
+						fontSize = 12.sp,
+						fontWeight = FontWeight.SemiBold
+					)
+				}
 			}
 		}
 	}
@@ -287,14 +303,14 @@ fun ProductItem(
 
 @Composable
 fun ListProduct(modifier: Modifier = Modifier) {
-	LazyVerticalGrid(
+	LazyVerticalStaggeredGrid(
 		modifier = modifier
 			.fillMaxSize()
 			.padding(horizontal = 8.dp),
-		columns = GridCells.Fixed(2),
+		columns = StaggeredGridCells.Adaptive(160.dp),
 		contentPadding = PaddingValues(6.dp),
 		horizontalArrangement = Arrangement.spacedBy(6.dp),
-		verticalArrangement = Arrangement.spacedBy(6.dp),
+		verticalItemSpacing = 6.dp
 	) {
 		items(productExample.size, key = { it }) {
 			ProductItem(item = productExample[it])
