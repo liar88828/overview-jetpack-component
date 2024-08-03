@@ -4,8 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import com.tutor.overview_jetpack_component.ui.theme.OverviewJetpackComponentTheme
+import com.tutor.overview_jetpack_component.weather_app.persentation.WeatherViewModel
+import com.tutor.overview_jetpack_component.weather_app.screen.WeatherScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("UNCHECKED_CAST")
@@ -42,7 +46,13 @@ class MainActivity : ComponentActivity() {
 //				ProductNavigation(
 ////					productRetrofitApi
 //				)
-
+				weatherViewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
+				WeatherScreen(
+//					weatherResult = weatherViewModel.weatherResponse.observeAsState(),
+					viewModel = weatherViewModel,
+					state = weatherViewModel.weatherState.collectAsState(),
+					onEvent = weatherViewModel::onEvent
+				)
 			}
 		}
 	}
@@ -54,6 +64,7 @@ class MainActivity : ComponentActivity() {
 //			}
 //		}
 //	})
+	private lateinit var weatherViewModel: WeatherViewModel
 
 }
 
