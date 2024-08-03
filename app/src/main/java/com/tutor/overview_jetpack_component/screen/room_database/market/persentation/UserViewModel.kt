@@ -15,6 +15,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+//inner
+//val userViewModel = viewModel(modelClass = UserViewModel::class.java)
+
 class UserViewModel(
 	private val dao: UserDao = UserGraph.dao
 //	private val dao:MyApplication.userDatabase.dao

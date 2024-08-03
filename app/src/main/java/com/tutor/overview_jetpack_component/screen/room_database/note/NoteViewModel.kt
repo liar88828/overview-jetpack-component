@@ -6,6 +6,15 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
+//private val noteViewModel by viewModels<NoteViewModel>(
+//	factoryProducer = {
+//		object : ViewModelProvider.Factory {
+//			override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//				return NoteViewModel(NoteRepo(noteDatabase)) as T
+//			}
+//		}
+//	})
+
 class NoteViewModel(
 	private val repo: NoteRepo
 ) : ViewModel() {

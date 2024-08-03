@@ -11,6 +11,27 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+//private val contactViewModel by viewModels<ContactViewModel>(
+//	factoryProducer = {
+//		object : ViewModelProvider.Factory {
+//			override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//				return ContactViewModel(db.dao) as T
+//			}
+//		}
+//	}
+//)
+//
+//private val db by lazy {
+//	Room.databaseBuilder(
+//		applicationContext,
+//		ContactDatabase::class.java,
+//		"contacts.db"
+//	)
+//		.build()
+//}
+//val contactState by contactViewModel.state.collectAsState()
+
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class ContactViewModel(
 	private val dao: ContactDao

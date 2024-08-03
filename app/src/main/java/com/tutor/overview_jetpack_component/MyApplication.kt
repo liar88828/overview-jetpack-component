@@ -22,6 +22,7 @@ class MyApplication : Application() {
 
 	override fun onCreate() {
 		super.onCreate()
+//		Timber.plant(Timber.DebugTree())
 		Graph.provide(this)
 		UserGraph.provide(this)
 		ProductGraph.provide(this)

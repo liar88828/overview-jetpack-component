@@ -2,7 +2,7 @@ plugins {
 	alias(libs.plugins.android.application)
 	alias(libs.plugins.kotlin.android)
 	alias(libs.plugins.kotlin.compose)
-	kotlin("kapt")
+	kotlin("kapt")//  version "2.0.0"
 	id("kotlin-kapt")
 	id("com.google.dagger.hilt.android")
 }
@@ -18,7 +18,10 @@ android {
 		versionCode = 1
 		versionName = "1.0"
 
-		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner.HiltTestRunner"
+		vectorDrawables {
+			useSupportLibrary = true
+		}
 	}
 
 	buildTypes {
@@ -59,32 +62,78 @@ dependencies {
 	androidTestImplementation(libs.androidx.ui.test.junit4)
 	debugImplementation(libs.androidx.ui.tooling)
 	debugImplementation(libs.androidx.ui.test.manifest)
+
 	// Room Database
-	dependencies {
-		implementation(libs.androidx.room.ktx)
-		//noinspection KaptUsageInsteadOfKsp
-		kapt(libs.androidx.room.compiler)
-		implementation(libs.androidx.room.runtime)
-	}
+	implementation(libs.androidx.room.ktx)
+	kapt(libs.androidx.room.compiler) // @Note: Kapt is used for annotation processing
+	implementation(libs.androidx.room.runtime)
+
 	// LiveData
 	implementation(libs.androidx.lifecycle.livedata.ktx)
-// permission handle
+
+	// Permissions Handling
 	implementation(libs.accompanist.permissions)
-//	navigation
+
+	// Navigation
 	implementation(libs.androidx.lifecycle.runtime.compose)
 	implementation(libs.androidx.navigation.compose)
+
 	// DataStore
 	implementation(libs.androidx.datastore.preferences)
-	// Hilt
+
+	// Dependency Injection (Hilt)
+	//	implementation(libs.dagger.hilt.android)
+	//	kapt(libs.hilt.compiler)
+	//	kapt(libs.androidx.hilt.compiler)
+	//	implementation(libs.androidx.hilt.lifecycle.viewmodel)
+	//	implementation(libs.androidx.hilt.navigation.compose)
+	// Dagger - Hilt
 	implementation(libs.dagger.hilt.android)
 	kapt(libs.hilt.compiler)
-//	Icon
-	implementation(libs.androidx.material.icons.extended)
+	kapt(libs.androidx.hilt.compiler)
+	implementation(libs.androidx.hilt.navigation.compose)
 //
+	androidTestImplementation(libs.hilt.android.testing)
+	kaptAndroidTest(libs.hilt.android.compiler)
+
+	// Icons
+	implementation(libs.androidx.material.icons.extended)
+
+	// Networking (Retrofit, OkHttp, Gson)
 	implementation(libs.retrofit)
 	implementation(libs.converter.gson)
 	implementation(libs.okhttp)
 	implementation(libs.logging.interceptor)
-	// Coil
+
+	// Image Loading (Coil)
 	implementation(libs.coil.compose)
+
+	// Local Tests
+	testImplementation(libs.junit)
+	testImplementation(libs.truth)
+	testImplementation(libs.androidx.core)
+	testImplementation(libs.androidx.core.testing)
+	testImplementation(libs.kotlinx.coroutines.test)
+	testImplementation(libs.mockwebserver)
+	testImplementation(libs.mockk)
+	debugImplementation(libs.ui.test.manifest)
+
+	// Instrumented Tests
+//	androidTestImplementation(libs.core.ktx)
+//	androidTestImplementation(libs.truth)
+//	androidTestImplementation(libs.mockwebserver)
+//	androidTestImplementation(libs.mockk.android)
+//
+//	androidTestImplementation(libs.androidx.espresso.core)
+//	androidTestImplementation(libs.androidx.junit)
+//	androidTestImplementation(libs.androidx.ui.test.junit4)
+//	androidTestImplementation(platform(libs.androidx.compose.bom))
+//	androidTestImplementation(libs.androidx.core.testing)
+//	androidTestImplementation(libs.androidx.runner)
+//
+//	androidTestImplementation(libs.kotlinx.coroutines.test)
+}
+// Allow references to generated code
+kapt {
+	correctErrorTypes = true
 }

@@ -8,8 +8,10 @@ import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.Date
 
+//todoViewModel = ViewModelProvider(this)[TodoViewModel::class.java]
+//private lateinit var todoViewModel: TodoViewModel
 class TodoViewModel : ViewModel() {
-	val todoDao = MyApplication.todoDatabase.dao
+	private val todoDao = MyApplication.todoDatabase.dao
 	val todoList = todoDao.getAllTodo()
 
 	fun addTodo(todo: String) {

@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+//private val mainViewModel by viewModels<MyMainModel>()
+
+
 @HiltViewModel
 class MyMainModel
 @Inject

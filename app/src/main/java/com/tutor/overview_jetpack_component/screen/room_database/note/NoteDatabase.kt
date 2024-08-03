@@ -10,3 +10,12 @@ import androidx.room.RoomDatabase
 abstract class NoteDatabase : RoomDatabase() {
 	abstract val dao: NoteDao
 }
+//private val noteDatabase by lazy {
+//	Room.databaseBuilder(
+//		applicationContext,
+//		NoteDatabase::class.java,
+//		"notes.db"
+//	)
+//		.build()
+//}
+//

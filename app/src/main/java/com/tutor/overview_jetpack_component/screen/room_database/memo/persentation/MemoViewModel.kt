@@ -14,6 +14,24 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+//private val memoViewModel by viewModels<MemoViewModel>(
+//	factoryProducer = {
+//		object : ViewModelProvider.Factory {
+//			override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//				return MemoViewModel(memoDatabase.dao) as T
+//			}
+//		}
+//	}
+//)
+//private val memoDatabase by lazy {
+//	Room.databaseBuilder(
+//		applicationContext,
+//		MemoDatabase::class.java,
+//		"memos.db"
+//	)
+//		.build()
+//}
+
 class MemoViewModel(
 	private val dao: MemoDao
 ) : ViewModel() {

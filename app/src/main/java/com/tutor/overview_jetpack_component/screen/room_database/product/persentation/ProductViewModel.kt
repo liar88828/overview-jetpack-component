@@ -13,6 +13,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+//inner
+//val ProductViewModel = viewModel(modelClass = ProductViewModel::class.java)
+
 class ProductViewModel(
 	private val dao: ProductDao = ProductGraph.dao,
 ) : ViewModel() {
