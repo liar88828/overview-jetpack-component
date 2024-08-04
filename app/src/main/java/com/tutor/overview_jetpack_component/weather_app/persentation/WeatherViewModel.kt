@@ -13,6 +13,14 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
+//	private lateinit var weatherViewModel: WeatherViewModel
+//				weatherViewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
+//				WeatherScreen(
+////					weatherResult = weatherViewModel.weatherResponse.observeAsState(),
+//					viewModel = weatherViewModel,
+//					state = weatherViewModel.weatherState.collectAsState(),
+//					onEvent = weatherViewModel::onEvent
+//				)
 class WeatherViewModel : ViewModel() {
 	private val weatherApi = WeatherInstance.weatherApi
 
@@ -22,11 +30,18 @@ class WeatherViewModel : ViewModel() {
 	private val _weatherState = MutableStateFlow(WeatherState())
 	val weatherState = _weatherState.asStateFlow()
 
+	init {
+		onEvent(
+			WeatherEvent.GetCity(
+				city = "Jakarta"
+			)
+		)
+	}
+
 	fun onEvent(event: WeatherEvent) {
 		when (event) {
 			is WeatherEvent.GetCity -> {
 				_weatherResponse.value = WeatherResponse.Loading
-
 				viewModelScope.launch {
 					val response = try {
 						weatherApi.getWeather(city = event.city, apiKey = Constance.KEY)
